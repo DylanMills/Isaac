@@ -3,7 +3,10 @@ guid: 475f4c7c6d0e8fa438a56112cbb3b99b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - shootPoint: {instanceID: 0}
+  - tear: {fileID: 5436866853039922000, guid: de3aaeb667c69a443a278d86570e1bd2, type: 3}
+  - bullet: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
