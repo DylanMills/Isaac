@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class Tear : MonoBehaviour
 {
-    public Rigidbody2D rigidBody;
-    public float tearSpeed = 75f;
+    [SerializeField] float tearSpeed = 75f;
+    [SerializeField] int tearDamage = 1;
+
+    Rigidbody2D rigidbody;
+
     void Start()
     {
-        rigidBody.velocity = transform.right * tearSpeed;
+        rigidbody = GetComponent<Rigidbody2D>();
+
+        rigidbody.velocity = transform.right * tearSpeed;
+    }
+
+    public int GetDamage()
+    {
+        return tearDamage;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    CarMovement car;
+    PlayerMovement player;
     Shoot shooter;
 
     [SerializeField] float shootDelay = 0.1f;
@@ -12,7 +12,7 @@ public class InputHandler : MonoBehaviour
     float timeToNextShot;
     private void Awake()
     {
-        car = GetComponent<CarMovement>();
+        player = GetComponent<PlayerMovement>();
         shooter = GetComponent<Shoot>();
     }
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class InputHandler : MonoBehaviour
         {
             vFire = 0;
         }
-        car.SetInputVector(inputVector);
+        player.SetInputVector(inputVector);
         if (CanShoot()&& (Mathf.Abs(hFire)>0 || Mathf.Abs(vFire) > 0))
         {
             shooter.Projectile(hFire, vFire);

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class CarMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D body;
 
@@ -28,7 +28,7 @@ public class CarMovement : MonoBehaviour
     {
         if (body.velocity.magnitude > maxSpeed)
         {
-          forceX *= 0.8f;
+            forceX *= 0.8f;
             forceY *= 0.8f;
         }
 
