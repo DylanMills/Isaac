@@ -7,17 +7,25 @@ public class Tear : MonoBehaviour
     [SerializeField] float tearSpeed = 75f;
     [SerializeField] int tearDamage = 1;
 
-    Rigidbody2D rigidbody;
+    Rigidbody2D body;
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
 
-        rigidbody.velocity = transform.right * tearSpeed;
+        body.velocity = transform.right * tearSpeed;
     }
 
     public int GetDamage()
     {
         return tearDamage;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag != "Enemy" && collision.tag != "Floor")
+        {
+            Destroy(gameObject);
+        }
     }
 }

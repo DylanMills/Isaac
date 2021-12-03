@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5436866853039922002}
   - component: {fileID: 5436866853039922003}
   - component: {fileID: 7313732544103600166}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tear
   m_TagString: Tear
   m_Icon: {fileID: 0}
@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27602838dcb1b3b43aad11b15b95317c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 5436866853039922002}
   tearSpeed: 75
+  tearDamage: 1

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float speed = 0;
-    [SerializeField] Transform PlayerTransform;
+    Transform playerTransform;
 
     Rigidbody2D body;
 
@@ -13,11 +13,13 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+
+        playerTransform = GameObject.Find("Isaac").GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        body.velocity = (PlayerTransform.position - transform.position).normalized * speed;
+        body.velocity = (playerTransform.position - transform.position).normalized * speed;
     }
 }

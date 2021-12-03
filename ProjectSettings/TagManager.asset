@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Tear
+  - Explosion
+  - Floor
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - Player
   - Enemies
   - Environment
-  - 
+  - Tears
   - 
   - 
   - 

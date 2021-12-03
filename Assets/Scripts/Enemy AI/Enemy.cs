@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         return enemyContactDamage;
     }
 
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _health -= damage;
     }
@@ -35,9 +35,14 @@ public class Enemy : MonoBehaviour
     {
         if (collision.tag == "Tear" && GetComponent<Renderer>().isVisible)
         {
-            takeDamage(collision.gameObject.GetComponent<Tear>().GetDamage());
+            TakeDamage(collision.gameObject.GetComponent<Tear>().GetDamage());
 
             Destroy(collision.gameObject);
+        }
+
+        if (collision.tag == "Explosion" && GetComponent<Renderer>().isVisible)
+        {
+            TakeDamage(collision.gameObject.GetComponent<Explosion>().GetDamage());
         }
     }
 }

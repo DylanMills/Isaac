@@ -20,16 +20,20 @@ public class InputHandler : MonoBehaviour
     {
         float hFire = Input.GetAxis("HFire");
         float vFire = Input.GetAxis("VFire");
+
         Vector2 inputVector = Vector2.zero;
 
         inputVector.x = Input.GetAxis("Horizontal");
         inputVector.y = Input.GetAxis("Vertical");
+
         if (hFire != 0)
         {
             vFire = 0;
         }
+
         player.SetInputVector(inputVector);
-        if (CanShoot()&& (Mathf.Abs(hFire)>0 || Mathf.Abs(vFire) > 0))
+
+        if (CanShoot() && (Mathf.Abs(hFire) > 0 || Mathf.Abs(vFire) > 0))
         {
             shooter.Projectile(hFire, vFire);
         }

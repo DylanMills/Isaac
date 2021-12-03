@@ -7,13 +7,17 @@ public class Player : MonoBehaviour
 {
     [SerializeField] int _health = 100;
 
-    Renderer renderer;
+    [SerializeField] GameObject explosion;
+
+    Renderer render;
+
+    Room currentRoom;
 
     private bool invincibility = false;
 
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        render = GetComponent<Renderer>();
     }
 
     void Update()
@@ -22,9 +26,19 @@ public class Player : MonoBehaviour
         {
             Die();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            currentRoom.SetComplete();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
+        }
     }
 
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _health -= damage;
     }
@@ -39,24 +53,51 @@ public class Player : MonoBehaviour
     {
         invincibility = false;
 
-        renderer.material.color = Color.white;
+        render.material.color = Color.white;
 
         Debug.Log("clear, NOT invincible, normal");
+    }
+
+    public Room GetCurrentRoom()
+    {
+        return currentRoom;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!invincibility && collision.gameObject.tag == "Enemy" && GetComponent<Renderer>().isVisible)
         {
-            takeDamage(collision.gameObject.GetComponent<Enemy>().GetContactDamage());
+            TakeDamage(collision.gameObject.GetComponent<Enemy>().GetContactDamage());
 
             invincibility = true;
 
-            renderer.material.color = Color.red;
+            render.material.color = Color.red;
 
             Debug.Log("damaged, invincible, red");
         }
 
         Invoke("ResetInvincibility", 1f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            Room collidedRoom = collision.GetComponentInParent<Room>();
+
+            if (collidedRoom != currentRoom)
+            {
+                currentRoom = collidedRoom;
+
+                Debug.Log(currentRoom.name);
+
+                currentRoom.EnterRoom();
+            }
+        }
+
+        if (collision.tag == "Explosion" && GetComponent<Renderer>().isVisible)
+        {
+            TakeDamage(collision.gameObject.GetComponent<Explosion>().GetDamage());
+        }
     }
 }
