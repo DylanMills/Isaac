@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] int _health = 100;
+    [SerializeField] Text deathText;
 
     Renderer renderer;
 
@@ -31,8 +33,14 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("You (technically) Died");
+        deathText.text = "You Died";
+        Invoke("ResetLevel", 5);
+    }
+
+    void ResetLevel()
+    {
         SceneManager.LoadScene("SampleScene");
+        deathText.text = "";
     }
 
     void ResetInvincibility()
@@ -40,8 +48,6 @@ public class Player : MonoBehaviour
         invincibility = false;
 
         renderer.material.color = Color.white;
-
-        Debug.Log("clear, NOT invincible, normal");
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -53,8 +59,6 @@ public class Player : MonoBehaviour
             invincibility = true;
 
             renderer.material.color = Color.red;
-
-            Debug.Log("damaged, invincible, red");
         }
 
         Invoke("ResetInvincibility", 1f);
