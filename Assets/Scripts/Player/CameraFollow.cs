@@ -43,25 +43,25 @@ public class CameraFollow : MonoBehaviour
         {
             if (playerTrans.position.y > cameraTrans.position.y + (Room._height / 2))
             {
-                playerTrans.position += Vector3.up * Room._scale;
+                playerTrans.position += Vector3.up * (Room._scale + 2);
 
                 SetupMove(new Vector3(0, Room._height));
             }
             if (playerTrans.position.y < cameraTrans.position.y - (Room._height / 2))
             {
-                playerTrans.position -= Vector3.up * Room._scale;
+                playerTrans.position -= Vector3.up * (Room._scale + 2);
 
                 SetupMove(new Vector3(0, -Room._height));
             }
             if (playerTrans.position.x > cameraTrans.position.x + (Room._width / 2))
             {
-                playerTrans.position += Vector3.right * Room._scale;
+                playerTrans.position += Vector3.right * (Room._scale + 2);
 
                 SetupMove(new Vector3(Room._width, 0));
             }
             if (playerTrans.position.x < cameraTrans.position.x - (Room._width / 2))
             {
-                playerTrans.position -= Vector3.right * Room._scale;
+                playerTrans.position -= Vector3.right * (Room._scale + 2);
 
                 SetupMove(new Vector3(-Room._width, 0));
             }

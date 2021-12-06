@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3605074573345133279}
   - component: {fileID: 7200087630008512388}
   - component: {fileID: -7620876486285231332}
-  - component: {fileID: 5661359258208510263}
+  - component: {fileID: 1052077289431938078}
   - component: {fileID: -7953789235722963552}
   - component: {fileID: 4610002052156392710}
   m_Layer: 7
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: e63e49f1a0acdb44aa54174c9e099a77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -101,14 +101,14 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &5661359258208510263
-PolygonCollider2D:
+--- !u!58 &1052077289431938078
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,50 +120,9 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.11, y: 2.25}
-    newSize: {x: 2.11, y: 2.25}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.865, y: -0.625}
-      - {x: 0.865, y: -0.315}
-      - {x: 0.825, y: -0.015}
-      - {x: 0.72499996, y: 0.225}
-      - {x: 0.565, y: 0.375}
-      - {x: 0.465, y: 0.515}
-      - {x: 0.275, y: 0.66499996}
-      - {x: 0.145, y: 0.685}
-      - {x: 0.114999995, y: 0.765}
-      - {x: 0.044999998, y: 0.875}
-      - {x: 0.015, y: 0.895}
-      - {x: -0.105, y: 0.935}
-      - {x: -0.21499999, y: 0.935}
-      - {x: -0.315, y: 0.84499997}
-      - {x: -0.315, y: 0.775}
-      - {x: -0.375, y: 0.645}
-      - {x: -0.575, y: 0.615}
-      - {x: -0.645, y: 0.545}
-      - {x: -0.705, y: 0.385}
-      - {x: -0.78499997, y: 0.285}
-      - {x: -0.875, y: 0.085}
-      - {x: -0.875, y: -0.225}
-      - {x: -0.865, y: -0.235}
-      - {x: -0.78499997, y: -0.445}
-      - {x: -0.635, y: -0.66499996}
-      - {x: -0.49499997, y: -0.805}
-      - {x: -0.39499998, y: -0.875}
-      - {x: -0.195, y: -0.905}
-      - {x: 0.225, y: -0.905}
-      - {x: 0.49499997, y: -0.84499997}
-      - {x: 0.755, y: -0.775}
-      - {x: 0.835, y: -0.685}
+  m_Offset: {x: 0, y: -0.14919484}
+  serializedVersion: 2
+  m_Radius: 0.7534759
 --- !u!114 &-7953789235722963552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e5200320a42914495bccc6a5db6183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 7
+  _health: 6
   enemyContactDamage: 5
 --- !u!114 &4610002052156392710
 MonoBehaviour:
@@ -190,5 +149,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0bc01bbb07b86e459762c0effaf5e98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  PlayerTransform: {fileID: 0}
+  speed: 12

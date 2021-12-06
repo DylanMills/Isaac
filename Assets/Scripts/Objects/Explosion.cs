@@ -5,8 +5,7 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     float explosionForce = 4f;
-    
-    [SerializeField] int damage = 2;
+    int damage = 10;
 
     void Awake()
     {
@@ -20,8 +19,7 @@ public class Explosion : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Rigidbody2D body;
-        if (other.gameObject.TryGetComponent<Rigidbody2D>(out body))
+        if (other.gameObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D body))
         {
             Vector2 outwardForce = Vector3.Normalize(other.transform.position - transform.position);
 

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float vInput = 0;
     [SerializeField] private float forceY = 0;
     [SerializeField] private float forceX = 0;
-    [SerializeField] private float maxSpeed;
+    [SerializeField] public float maxSpeed;
 
     private void Start()
     {

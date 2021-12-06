@@ -8,6 +8,8 @@ public class Shoot : MonoBehaviour
     public GameObject tear;
     GameObject bullet;
 
+    public int damage = 3;
+
     public void Projectile(float h, float v)
     {
         var dir = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -30,6 +32,8 @@ public class Shoot : MonoBehaviour
 
         }
         bullet = Instantiate(tear, shootPoint.position, dir);
-        Destroy(bullet, 1);
+        bullet.GetComponent<Tear>().SetDamage(damage);
+
+        Destroy(bullet, .8f);
     }
 }

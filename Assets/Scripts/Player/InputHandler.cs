@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    PlayerMovement player;
+    Player player;
+    PlayerMovement playerMove;
     Shoot shooter;
 
-    [SerializeField] float shootDelay = 0.1f;
+    [SerializeField] GameObject bomb;
+    [SerializeField] public float shootDelay = 0.1f;
 
     float timeToNextShot;
     private void Awake()
     {
-        player = GetComponent<PlayerMovement>();
+        player = GetComponent<Player>();
+        playerMove = GetComponent<PlayerMovement>();
         shooter = GetComponent<Shoot>();
     }
     // Update is called once per frame
@@ -31,13 +34,18 @@ public class InputHandler : MonoBehaviour
             vFire = 0;
         }
 
-        player.SetInputVector(inputVector);
+        playerMove.SetInputVector(inputVector);
 
         if (CanShoot() && (Mathf.Abs(hFire) > 0 || Mathf.Abs(vFire) > 0))
         {
             shooter.Projectile(hFire, vFire);
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && player._bombs > 0)
+        {
+            player._bombs--;
+            Instantiate(bomb, transform.position - transform.up, Quaternion.Euler(0, 0, 0));
+        }
     }
     private bool CanShoot()
     {

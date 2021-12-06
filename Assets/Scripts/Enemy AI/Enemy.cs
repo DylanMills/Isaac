@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int _health = 1;
+    Player player;
 
+    [SerializeField] int _health = 1;
     [SerializeField] int enemyContactDamage = 1;
+
+    [SerializeField] bool isBoss;
+    [SerializeField] GameObject endScreen;
+
+    void Awake()
+    {
+        player = GameObject.Find("Isaac").GetComponent<Player>();
+    }
 
     void Update()
     {
@@ -21,6 +30,11 @@ public class Enemy : MonoBehaviour
         return enemyContactDamage;
     }
 
+    public int GetHealth()
+    {
+        return _health;
+    }
+
     public void TakeDamage(int damage)
     {
         _health -= damage;
@@ -28,6 +42,13 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        player.GetCurrentRoom().AddEnemyKill();
+
+        if (isBoss)
+        {
+            Instantiate(endScreen, GameObject.Find("Canvas").transform);
+        }
+
         Destroy(gameObject);
     }
 

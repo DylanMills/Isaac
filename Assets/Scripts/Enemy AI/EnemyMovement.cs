@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] float speed = 0;
+    [SerializeField] float speed;
     Transform playerTransform;
 
     Rigidbody2D body;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         body = GetComponent<Rigidbody2D>();
 

@@ -10,6 +10,9 @@ public class Room : MonoBehaviour
     ItemSpawn[] itemSpawns;
     EnemySpawn[] enemySpawns;
 
+    int totalEnemies;
+    int kills = 0;
+
     bool[] isConnectedURDL = new bool[4];
 
     public static float _height = 40f;
@@ -17,6 +20,7 @@ public class Room : MonoBehaviour
     public static float _scale = _height / 10f;
 
     bool isComplete;
+    bool isEntered;
 
     void Awake()
     {
@@ -30,17 +34,27 @@ public class Room : MonoBehaviour
             SetConnected(i, false);
         }
         isComplete = false;
+        isEntered = false;
+
+        totalEnemies = enemySpawns.Length;
 
         trans.position = new Vector3(trans.position.x * _width, trans.position.y * _height);
     }
 
+    void Update()
+    {
+        if (isEntered)
+        {
+            if (kills == totalEnemies)
+            {
+                SetComplete();
+                kills++;
+            }
+        }
+    }
+
     public void AutoSetConnected(Transform roomTrans)
     {
-        Debug.Log("Setting up walls...");
-
-        Debug.Log("Current pos: " + trans.position);
-        Debug.Log("Other pos: " + roomTrans.position);
-
         if (roomTrans.position == new Vector3(trans.position.x, trans.position.y + _height))
         {
             SetConnected(0, true);
@@ -157,6 +171,13 @@ public class Room : MonoBehaviour
             {
                 spawn.SpawnEnemy();
             }
+
+            isEntered = true;
         }
+    }
+
+    public void AddEnemyKill()
+    {
+        kills++;
     }
 }

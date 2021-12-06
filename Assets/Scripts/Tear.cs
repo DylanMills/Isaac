@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tear : MonoBehaviour
 {
     [SerializeField] float tearSpeed = 75f;
-    [SerializeField] int tearDamage = 1;
+    int tearDamage = 1;
 
     Rigidbody2D body;
 
@@ -21,8 +21,18 @@ public class Tear : MonoBehaviour
         return tearDamage;
     }
 
+    public void SetDamage(int damage)
+    {
+        tearDamage = damage;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D bodyOther) && collision.tag != "Enemy")
+        {
+            bodyOther.AddForce(body.velocity.normalized * 10f, ForceMode2D.Impulse);
+        }
+
         if (collision.tag != "Enemy" && collision.tag != "Floor")
         {
             Destroy(gameObject);

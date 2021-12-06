@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int _health = 100;
-
     [SerializeField] GameObject explosion;
+
+    public int _health = 100;
+    public int _soulHealth = 0;
+    public int _money = 0;
+    public int _bombs = 1;
 
     Renderer render;
 
@@ -26,27 +29,40 @@ public class Player : MonoBehaviour
         {
             Die();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentRoom.SetComplete();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
-        }
+        _health = Mathf.Clamp(_health, 0, 100);
+        _soulHealth = Mathf.Clamp(_soulHealth, 0, 100);
     }
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
+        if (_soulHealth == 0)
+        {
+            _health -= damage;
+            render.material.color = Color.red;
+        }
+        else
+        {
+            _soulHealth -= damage;
+            if (_soulHealth < 0)
+            {
+                _health += _soulHealth;
+                render.material.color = Color.red;
+            }
+            else
+            {
+                render.material.color = Color.magenta;
+            }
+        }
+
+        invincibility = true;
+        Invoke("ResetInvincibility", 1f);
     }
 
     public void Die()
     {
-        Debug.Log("You (technically) Died");
-        SceneManager.LoadScene("SampleScene");
+        gameObject.SetActive(false);
+
+        Invoke("ResetGame", 2f);
     }
 
     void ResetInvincibility()
@@ -54,8 +70,11 @@ public class Player : MonoBehaviour
         invincibility = false;
 
         render.material.color = Color.white;
+    }
 
-        Debug.Log("clear, NOT invincible, normal");
+    void ResetGame()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 
     public Room GetCurrentRoom()
@@ -68,15 +87,7 @@ public class Player : MonoBehaviour
         if (!invincibility && collision.gameObject.tag == "Enemy" && GetComponent<Renderer>().isVisible)
         {
             TakeDamage(collision.gameObject.GetComponent<Enemy>().GetContactDamage());
-
-            invincibility = true;
-
-            render.material.color = Color.red;
-
-            Debug.Log("damaged, invincible, red");
         }
-
-        Invoke("ResetInvincibility", 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -88,8 +99,6 @@ public class Player : MonoBehaviour
             if (collidedRoom != currentRoom)
             {
                 currentRoom = collidedRoom;
-
-                Debug.Log(currentRoom.name);
 
                 currentRoom.EnterRoom();
             }

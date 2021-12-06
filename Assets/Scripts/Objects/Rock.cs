@@ -28,8 +28,8 @@ public class Rock : MonoBehaviour
         {
             if (isTinted)
             {
-                Instantiate(soulHeart, transform.position, Quaternion.Euler(Vector3.zero));
-                Instantiate(soulHeart, transform.position, Quaternion.Euler(Vector3.zero));
+                Instantiate(soulHeart, transform.position + Vector3.right, Quaternion.Euler(Vector3.zero));
+                Instantiate(soulHeart, transform.position - Vector3.right, Quaternion.Euler(Vector3.zero));
             }
 
             Destroy(gameObject);
