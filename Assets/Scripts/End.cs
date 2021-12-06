@@ -20,6 +20,6 @@ public class End : MonoBehaviour
     {
         image.color = new Color(0, 0, 0, Mathf.Clamp01(timer));
 
-        timer += .0005f;
+        timer += Time.deltaTime * .5f;
     }
 }

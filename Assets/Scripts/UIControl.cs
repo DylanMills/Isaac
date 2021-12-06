@@ -27,7 +27,7 @@ public class UIControl : MonoBehaviour
         coinCount.text = $"x {player._money}";
         bombCount.text = $"x {player._bombs}";
 
-        splash.color = new Color(1, 1, 1, splash.color.a - .001f);
+        splash.color = new Color(1, 1, 1, Mathf.Clamp01(splash.color.a - Time.deltaTime * .75f));
     }
 
     public void SetSplash(string text)
